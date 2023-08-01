@@ -1,22 +1,59 @@
-void createTasks(){
-print("Creating Tasks");
+import 'dart:io';
+import '../classes/TaskManager.dart';
+import './functions.dart';
 
-        String? title;
-        String? description;
-        String? due_date;
+void start(){
+  var TaskManagerObject = TaskManager();
+  String? ch;
 
-        print("Enter the title"); 
-        title = stdin.readLineSync();
-        print("Enter The Description");
-        description = stdin.readLineSync();
-        print("Enter the due date");
-        due_date = stdin.readLineSync();
+  while(ch != "8"){
+    menu();
 
-        if(title == "" || description == "" || due_date == ""){
+    ch = stdin.readLineSync();
 
-          print("All inputs are required");
-        }else{
-          String message = TaskManagerObject.createTask(title, description, due_date);
-          print(message);
-        }
+    switch(ch){
+      case "1":{
+        createTask(TaskManagerObject);
+      }
+      break;
+
+      case "2":{
+        UpdateTask(TaskManagerObject);
+      }
+      break;
+
+      case "3":{
+        viewPendingTasks(TaskManagerObject);
+      }
+      break;
+
+      case "4":{
+        viewCompletedTasks(TaskManagerObject);
+      }
+      break;
+
+      case "5":{
+        deleteTask(TaskManagerObject);
+      }
+      break;
+
+      case "6": {
+        clearTask(TaskManagerObject);
+      }
+      break;
+      case "7":{
+         completeTask(TaskManagerObject);
+      }
+      break;
+      case "8":{
+       print("Quitting");
+      }
+      break;
+      default:{
+        print("No such option");
+      }
+      break;
+    }
+  }
 }
+
