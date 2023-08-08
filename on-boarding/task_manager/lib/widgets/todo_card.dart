@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/feature/presentation/todo_list.dart';
 
-class TodoCard extends StatefulWidget {
-  const TodoCard({super.key});
+class TodoCard extends StatelessWidget {
 
-  @override
-  State<TodoCard> createState() => _TodoCardState();
-}
+  final String? name;
+  final String? date;
 
-class _TodoCardState extends State<TodoCard> {
+
+  const TodoCard({this.name, this.date});
+
   @override
   Widget build(BuildContext context) {
-    return  GestureDetector(
-      onTap: (){
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => TodoList())
-        );
-      },
-      child: Container(
+    return Container(  
+                      
                       padding: EdgeInsets.all(15),
                       margin: EdgeInsets.only(bottom: 8),
                       decoration: BoxDecoration(
@@ -76,7 +70,7 @@ class _TodoCardState extends State<TodoCard> {
                                 Container(
                                   width: 50,
                                   // height: 20,
-                                  child: Text("UI/UX App Design",
+                                  child: Text("$name",
                                   style: TextStyle(
                                     fontSize: 10,
                                     fontWeight: FontWeight.w800
@@ -96,11 +90,11 @@ class _TodoCardState extends State<TodoCard> {
                               )),
                              
                             ),
-                            child: Text("Apr, 29, 2023"),
+                            child: Text("$date"),
                           )
                         ],
                       ),
-      ),
+      
     );
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/widgets/nav_widget.dart';
-
+import 'package:intl/intl.dart';
 
 class CreateTodo extends StatefulWidget {
-   CreateTodo({super.key});
+
+  final Function addTodo;
+  CreateTodo(this.addTodo);
 
   @override
   State<CreateTodo> createState() => _CreateTodoState();
@@ -11,6 +13,13 @@ class CreateTodo extends StatefulWidget {
 
 class _CreateTodoState extends State<CreateTodo> {
   String? nav = "";
+
+  final _todoText = TextEditingController();
+
+  final _descriptionText = TextEditingController();
+
+  final _dateText = TextEditingController();
+
   @override
 
   Widget build(BuildContext context) {
@@ -104,6 +113,7 @@ class _CreateTodoState extends State<CreateTodo> {
                                         child: Padding(
                                           padding: const EdgeInsets.only(left: 30),
                                           child: TextFormField(
+                                            controller: _todoText,
                                             cursorColor: Colors.black,
                                             style: TextStyle(
                                               fontSize: 20,
@@ -157,6 +167,24 @@ class _CreateTodoState extends State<CreateTodo> {
                                         child: Padding(
                                           padding: const EdgeInsets.only(left: 30),
                                           child: TextFormField(
+                                            readOnly: true,
+                                            onTap: () async{
+                                              DateTime? pickedDate = await showDatePicker(
+                                                context: context,
+                                                initialDate: DateTime.now(), //get today's date
+                                                firstDate:DateTime(2000), //DateTime.now() - not to allow to choose before today.
+                                                lastDate: DateTime(2101));
+
+                                                if(pickedDate != null ){
+                                                    setState(() {
+                                                      _dateText.text = DateFormat('yyyy-MM-dd').format(pickedDate); //set foratted date to TextField value. 
+                                                    });
+                                                } else{
+                                                    print("Date is not selected");
+                                                }
+
+                                            },
+                                            controller:_dateText,
                                             cursorColor: Colors.black,
                                             style: TextStyle(
                                               fontSize: 20,
@@ -208,6 +236,7 @@ class _CreateTodoState extends State<CreateTodo> {
                                         child: Padding(
                                           padding: const EdgeInsets.only(left: 30),
                                           child: TextFormField(
+                                            controller: _descriptionText,
                                             keyboardType: TextInputType.multiline,
             
                                             maxLines: 3,
@@ -242,7 +271,12 @@ class _CreateTodoState extends State<CreateTodo> {
                       Container(
                         margin: EdgeInsets.only(top: 60),
                       child: FloatingActionButton.extended(
-                            onPressed: null,
+                            onPressed: (){
+                              widget.addTodo(new DateTime.now().toString(), _todoText.text, _descriptionText.text, _dateText.text);
+                              _todoText.clear();
+                              _descriptionText.clear();
+                              _dateText.clear();
+                            },
                             label:Text("Add task",style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w700,

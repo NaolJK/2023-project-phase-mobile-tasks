@@ -2,23 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:task_manager/widgets/todo_card.dart';
 import 'package:task_manager/widgets/nav_widget.dart';
 
+import '../../models/Todo.dart';
+
 
 class TodoList extends StatelessWidget{
 
+  
+
+  TodoList({required this.todos});
+
+  final List<Todo> todos;
+
+  
   Widget build(BuildContext context){
     List<Widget> lists = [];
-    for(int i=0; i < 8; ++i){
-      lists.add(TodoCard());
+    for(Todo todo in this.todos){
+      lists.add(TodoCard(name: todo.task_name, date: todo.due_date,));
     }
     return Scaffold(
       body: MaterialApp(
-    
-        
         debugShowCheckedModeBanner: false,
-    
         title: "Todo List",
-    
-    
         home: SafeArea(
     
           child: Scaffold(
