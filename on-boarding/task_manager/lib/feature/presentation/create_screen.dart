@@ -113,6 +113,7 @@ class _CreateTodoState extends State<CreateTodo> {
                                         child: Padding(
                                           padding: const EdgeInsets.only(left: 30),
                                           child: TextFormField(
+                                            key: Key("addField"),
                                             controller: _todoText,
                                             cursorColor: Colors.black,
                                             style: TextStyle(
@@ -167,6 +168,7 @@ class _CreateTodoState extends State<CreateTodo> {
                                         child: Padding(
                                           padding: const EdgeInsets.only(left: 30),
                                           child: TextFormField(
+                                            key: Key("dateInput"),
                                             readOnly: true,
                                             onTap: () async{
                                               DateTime? pickedDate = await showDatePicker(
@@ -236,6 +238,7 @@ class _CreateTodoState extends State<CreateTodo> {
                                         child: Padding(
                                           padding: const EdgeInsets.only(left: 30),
                                           child: TextFormField(
+                                            key: Key("descriptionField"),
                                             controller: _descriptionText,
                                             keyboardType: TextInputType.multiline,
             

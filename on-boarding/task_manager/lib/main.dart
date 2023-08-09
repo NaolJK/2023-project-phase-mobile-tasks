@@ -30,7 +30,7 @@ class _MyAppState extends State<MyApp> {
         '/':(context) => CoverPage(),
         '/create':(context) => CreateTodo(_handleAddTodo),
         '/details':(context) => ViewDetails(),
-        '/all':(context) => TodoList(todos: _todos,)
+        '/all':(context) => TodoList(_todos,)
       },
     );
   }

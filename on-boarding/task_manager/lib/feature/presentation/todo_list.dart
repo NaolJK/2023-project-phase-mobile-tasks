@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/feature/presentation/create_screen.dart';
 import 'package:task_manager/widgets/todo_card.dart';
 import 'package:task_manager/widgets/nav_widget.dart';
 
@@ -9,8 +10,9 @@ class TodoList extends StatelessWidget{
 
   
 
-  TodoList({required this.todos});
+  TodoList(this.todos);
 
+  // final Function addTodo;
   final List<Todo> todos;
 
   
@@ -66,7 +68,7 @@ class TodoList extends StatelessWidget{
                       child: Center(
                         child: FloatingActionButton.extended(
                           onPressed: (){
-                            Navigator.of(context).pushNamed('/create');
+                            Navigator.of(context).pushNamed("/create");
                           },
                           label:Text("Create task",style: TextStyle(
                             color: Colors.white,
