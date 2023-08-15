@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:task_manager/widgets/nav_widget.dart';
 import 'package:task_manager/widgets/view_widget.dart';
 
+import '../../data/models/Todo.dart';
+
 
 class ViewDetails extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
+    final data = ModalRoute.of(context)!.settings.arguments as Todo;
+    String? title = data.task_name;
+    String? description = data.description;
+    String? due_date = data.due_date;
     return MaterialApp(
       title: "View details",
       debugShowCheckedModeBanner: false,
@@ -31,9 +37,9 @@ class ViewDetails extends StatelessWidget{
 
                   Column(
                     children: [
-                      ViewList("Title", "UI/UX App Design"),
-                      ViewList("Description", "First I have to animate the logo and prototyping my design. It\'s very important."),
-                      ViewList("Deadline", "April. 29, 2023")
+                      ViewList("Title", "$title"),
+                      ViewList("Description", "$description"),
+                      ViewList("Deadline", "$due_date")
                     ],
                   )
                 ],

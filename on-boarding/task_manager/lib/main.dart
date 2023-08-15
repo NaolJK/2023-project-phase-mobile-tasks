@@ -4,7 +4,7 @@ import 'package:task_manager/feature/presentation/todo_list.dart';
 import 'package:task_manager/feature/presentation/create_screen.dart';
 import 'package:task_manager/feature/presentation/details_screen.dart';
 
-import 'models/Todo.dart';
+import 'data/models/Todo.dart';
 
 void main(){
   runApp(MyApp());

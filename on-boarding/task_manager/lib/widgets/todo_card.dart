@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/feature/presentation/todo_list.dart';
 
-class TodoCard extends StatelessWidget {
+class TodoCard extends StatefulWidget {
+
 
   final String? name;
   final String? date;
+  bool iscompleted;
+  final Function? change;
 
 
-  const TodoCard({this.name, this.date});
 
+  TodoCard({this.name, this.date, required this.iscompleted, this.change});
   @override
+  State<TodoCard> createState() => _TodoCardState();
+}
+
+class _TodoCardState extends State<TodoCard> {
+  
+  @override
+  
   Widget build(BuildContext context) {
-    return Container(  
-                      
-                      padding: EdgeInsets.all(15),
+    return Container( 
+                     padding: EdgeInsets.all(15),
                       margin: EdgeInsets.only(bottom: 8),
                       decoration: BoxDecoration(
                         border: Border.all(
@@ -70,10 +79,11 @@ class TodoCard extends StatelessWidget {
                                 Container(
                                   width: 50,
                                   // height: 20,
-                                  child: Text("$name",
+                                  child: Text("${widget.name}",
                                   style: TextStyle(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w800
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w800,
+                                    decoration: widget.iscompleted ? TextDecoration.lineThrough : TextDecoration.none
                                   ),),
                                 )
                               ],
@@ -84,13 +94,19 @@ class TodoCard extends StatelessWidget {
                             padding: EdgeInsets.only(right: 7),
                             decoration: BoxDecoration(
                               border: Border(right: BorderSide(
-                                color: Colors.red,
+                                color: widget.iscompleted ? Colors.green : Colors.red,
                                 width: 3,
-                                
                               )),
                              
                             ),
-                            child: Text("$date"),
+                            child: Checkbox(
+                            value:widget.iscompleted, 
+                            onChanged: (bool){
+                            setState(() {
+                              widget.iscompleted = !widget.iscompleted;
+                            });
+                            }
+                            ),
                           )
                         ],
                       ),

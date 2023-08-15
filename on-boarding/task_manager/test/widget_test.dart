@@ -5,7 +5,7 @@ import 'package:task_manager/feature/presentation/create_screen.dart';
 import 'package:task_manager/feature/presentation/todo_list.dart';
 import 'package:mockito/mockito.dart';
 import 'package:task_manager/main.dart';
-import 'package:task_manager/models/Todo.dart';
+import 'package:task_manager/data/models/Todo.dart';
 
 
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}

@@ -1,12 +1,14 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:task_manager/feature/presentation/create_screen.dart';
 import 'package:task_manager/widgets/todo_card.dart';
 import 'package:task_manager/widgets/nav_widget.dart';
 
-import '../../models/Todo.dart';
+import '../../data/models/Todo.dart';
 
 
-class TodoList extends StatelessWidget{
+class TodoList extends StatefulWidget{
 
   
 
@@ -15,11 +17,30 @@ class TodoList extends StatelessWidget{
   // final Function addTodo;
   final List<Todo> todos;
 
-  
+  @override
+  State<TodoList> createState() => _TodoListState();
+}
+
+class _TodoListState extends State<TodoList> {
   Widget build(BuildContext context){
+
+    
     List<Widget> lists = [];
-    for(Todo todo in this.todos){
-      lists.add(TodoCard(name: todo.task_name, date: todo.due_date,));
+    
+    // void change(object){
+    //   setState(() {
+    //     object.iscompleted = !object.iscompleted;
+    //   });
+    // }
+
+    for(Todo todo in this.widget.todos){
+      // List <String?> data = [todo.task_name,todo.description, todo.due_date];
+      lists.add(InkWell(onTap: (){
+        Navigator.pushNamed(
+          context,
+          "/details",
+          arguments:todo);
+      }, child: TodoCard(name: todo.task_name, date: todo.due_date,iscompleted: todo.iscompleted,)));
     }
     return Scaffold(
       body: MaterialApp(
